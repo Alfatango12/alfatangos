@@ -7,7 +7,7 @@ description: This is my personal OS image.
 
 # the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/bluefin:stable
-#image-version: 42 # latest is also supported if you want new updates ASAP
+image-version: latest # latest is also supported if you want new updates ASAP
 
 # module configuration, executed in order
 # you can include multiple instances of the same module
@@ -18,7 +18,7 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: dnf
-     repos:
+    repos:
        nonfree: rpmfusion
        cleanup: true
     install:
@@ -34,7 +34,9 @@ modules:
         - libva-utils
         - vdpauinfo
         - vulkan
-        - vulkanloader
+        - vulkan-loader
+        - vulkan-tools
+        - vulkan-loader-i686
 
     remove:
       packages:
@@ -55,7 +57,7 @@ modules:
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully
 
-- type: containerfile
+  - type: containerfile
     snippets:
       - |
         # Inietta le variabili d'ambiente in /etc/environment dentro l'immagine OCI
@@ -65,3 +67,8 @@ modules:
         
         # Opzionale: Forza Firefox a usare Wayland nativamente se usi Wayland
         echo "MOZ_ENABLE_WAYLAND=1" >> /etc/environment
+  - type: kargs
+    kargs:
+      - rd.driver.blacklist=nouveau
+      - modprobe.blacklist=nouveau
+      - nvidia-drm.modeset=1

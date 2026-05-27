@@ -1,5 +1,4 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
 name: alfatangos
 description: This is my personal OS image.
 
@@ -12,10 +11,22 @@ modules:
       - source: system
         destination: / 
 
-  # Modulo DNF pulito solo per installare i driver (Corretto l'allineamento qui sotto)
-  - type: containerfile
-    snippets:
-      - 'RUN rpm -Uvh --nodeps https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && dnf5 install -y --allowerasing --setopt=tsflags=noscripts akmod-nvidia-580xx xorg-x11-drv-nvidia-580xx xorg-x11-drv-nvidia-580xx-libs xorg-x11-drv-nvidia-580xx-cuda xorg-x11-drv-nvidia-580xx-cuda-libs xorg-x11-drv-nvidia-580xx-libs.i686 libva-nvidia-driver.i686 vulkan-loader.i686 libva-nvidia-driver libva-utils vdpauinfo vulkan-loader vulkan-tools && dnf5 clean all'
+  # Il modulo akmods configurato con tutti i pacchetti del ramo 580xx
+  - type: akmods
+    install:
+      - akmod-nvidia-580xx
+      - xorg-x11-drv-nvidia-580xx
+      - xorg-x11-drv-nvidia-580xx-libs
+      - xorg-x11-drv-nvidia-580xx-cuda
+      - xorg-x11-drv-nvidia-580xx-cuda-libs
+      - xorg-x11-drv-nvidia-580xx-libs.i686
+      - libva-nvidia-driver
+      - libva-nvidia-driver.i686
+      - libva-utils
+      - vdpauinfo
+      - vulkan-loader
+      - vulkan-loader.i686
+      - vulkan-tools
 
   - type: default-flatpaks
     configurations:
@@ -34,9 +45,3 @@ modules:
         RUN echo "LIBVA_DRIVER_NAME=nvidia" >> /etc/environment
         RUN echo "__GLX_VENDOR_LIBRARY_NAME=nvidia" >> /etc/environment
         RUN echo "MOZ_ENABLE_WAYLAND=1" >> /etc/environment
-
-  - type: kargs
-    kargs:
-      - rd.driver.blacklist=nouveau
-      - modprobe.blacklist=nouveau
-      - nvidia-drm.modeset=1

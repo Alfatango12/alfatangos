@@ -11,21 +11,9 @@ modules:
       - source: system
         destination: / 
 
-  - type: rpm-ostree
-    install:
-      - akmod-nvidia-580xx
-      - xorg-x11-drv-nvidia-580xx
-      - xorg-x11-drv-nvidia-580xx-libs
-      - xorg-x11-drv-nvidia-580xx-cuda
-      - xorg-x11-drv-nvidia-580xx-cuda-libs
-      - xorg-x11-drv-nvidia-580xx-libs.i686
-      - libva-nvidia-driver
-      - libva-nvidia-driver.i686
-      - libva-utils
-      - vdpauinfo
-      - vulkan-loader
-      - vulkan-loader.i686
-      - vulkan-tools
+  - type: nvidia
+  version: 580
+
   - type: default-flatpaks
     configurations:
       - notify: true 

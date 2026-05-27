@@ -20,7 +20,8 @@ modules:
 
   # Modulo DNF pulito solo per installare i driver
   - type: dnf
-    repos: nonfree
+    repos: 
+      rpmfusion: nonfree
     install:
       packages:
         # Driver Core Nvidia Legacy 580xx

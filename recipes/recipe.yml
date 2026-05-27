@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
 name: alfatangos
@@ -13,13 +12,8 @@ modules:
       - source: system
         destination: / 
 
-  #- type: rpm-ostree
-  #  remove:
-  #    - firefox
-  #    - firefox-langpacks
-
-  # Modulo DNF pulito solo per installare i driver
-- type: containerfile
+  # Modulo DNF pulito solo per installare i driver (Corretto l'allineamento qui sotto)
+  - type: containerfile
     snippets:
       - 'RUN rpm -Uvh --nodeps https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm && dnf5 install -y --allow-erasing --setopt=tsflags=noscripts akmod-nvidia-580xx xorg-x11-drv-nvidia-580xx xorg-x11-drv-nvidia-580xx-libs xorg-x11-drv-nvidia-580xx-cuda xorg-x11-drv-nvidia-580xx-cuda-libs xorg-x11-drv-nvidia-580xx-libs.i686 libva-nvidia-driver.i686 vulkan-loader.i686 libva-nvidia-driver libva-utils vdpauinfo vulkan-loader vulkan-tools && dnf5 clean all'
 

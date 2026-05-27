@@ -19,9 +19,11 @@ modules:
   #    - firefox-langpacks
 
   # Modulo DNF pulito solo per installare i driver
+- type: containerfile
+    snippets:
+     - RUN rpm -Uvh --nodeps https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+
   - type: dnf
-    repos: 
-      rpmfusion: nonfree
     install:
       packages:
         # Driver Core Nvidia Legacy 580xx

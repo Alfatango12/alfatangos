@@ -14,10 +14,10 @@ modules:
         destination: / 
 
   # Rimuoviamo Firefox usando rpm-ostree, isolandolo dai driver grafico
-  - type: rpm-ostree
-    remove:
-      - firefox
-      - firefox-langpacks
+  #- type: rpm-ostree
+  #  remove:
+  #    - firefox
+  #    - firefox-langpacks
 
   # Modulo DNF pulito solo per installare i driver
   - type: dnf

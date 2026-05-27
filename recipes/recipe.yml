@@ -16,13 +16,17 @@ modules:
     nvidia-driver: nvidia
     install: []
 
-  - type: default-flatpaks
-    notify: true
-    system:
-      install:
+- type: default-flatpaks
+  configurations:
+    - scope: user
+      repo:
+        title: Flathub (user)
+    - notify: true
+      scope: system
+      repo:
+        title: Flathub (system)
+      install: # system flatpaks we want all users to have and not remove
         - org.mozilla.firefox
-    user:
-      install: []
 
   - type: signing 
 

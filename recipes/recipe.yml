@@ -20,9 +20,7 @@ modules:
 
   # Modulo DNF pulito solo per installare i driver
   - type: dnf
-    repos:
-      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-%__fedora.noarch.rpm
-      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-%__fedora.noarch.rpm
+    repos: nonfree
     install:
       packages:
         # Driver Core Nvidia Legacy 580xx

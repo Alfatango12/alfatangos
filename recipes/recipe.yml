@@ -11,9 +11,13 @@ modules:
       - source: system
         destination: / 
 
-  # Il modulo akmods configurato con tutti i pacchetti del ramo 580xx
-  - type: akmods
+- type: rpm-ostree
+    repos:
+      # Aggiungiamo i repo RPM Fusion
+      - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+      - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     install:
+      # Specifichiamo i driver 580xx
       - akmod-nvidia-580xx
       - xorg-x11-drv-nvidia-580xx
       - xorg-x11-drv-nvidia-580xx-libs

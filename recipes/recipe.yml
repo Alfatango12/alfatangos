@@ -16,6 +16,21 @@ modules:
     nvidia-driver: nvidia
     install: []
 
+  - type: dnf
+    repos:
+      copr:
+        - scottames/ghostty
+    install:
+      packages:
+        - qemu-kvm
+        - libvirt-daemon-kvm
+        - libvirt-client
+        - virt-manager
+        - virt-viewer
+        - bridge-utils
+        - edk2-ovmf 
+        - ghostty
+
   - type: default-flatpaks
     configurations:
       - scope: user
@@ -27,13 +42,23 @@ modules:
           title: Flathub (system)
         install: # system flatpaks we want all users to have and not remove
           - org.mozilla.firefox
+          - com.bitwarden.desktop
+          - com.github.xournalpp.xournalpp
+          - dev.vencord.Vesktop
+          - io.github.dweymouth.supersonic
+          - com.nextcloud.desktopclient.nextcloud
 
   - type: signing 
 
   - type: containerfile
-    snippets:
+      snippets:
       - |
         RUN echo "MOZ_DISABLE_RDD_SANDBOX=1" >> /etc/environment
         RUN echo "LIBVA_DRIVER_NAME=nvidia" >> /etc/environment
         RUN echo "__GLX_VENDOR_LIBRARY_NAME=nvidia" >> /etc/environment
         RUN echo "MOZ_ENABLE_WAYLAND=1" >> /etc/environment
+
+  - type: systemd
+    system:
+      enabled:
+        - libvirtd.service

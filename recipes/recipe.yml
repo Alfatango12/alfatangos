@@ -2,30 +2,34 @@
 name: alfatangos
 description: This is my personal OS image.
 
-base-image: ghcr.io/ublue-os/bluefin-nvidia
+base-image: ghcr.io/ublue-os/bluefin
 image-version: latest
 
 modules:
   - type: files
     files:
       - source: system
-        destination: / 
+        destination: /
+
+  - type: akmods
+    base: main
+    nvidia-driver: nvidia
+    install: []
 
   - type: dnf
     repos:
       copr:
-        - scottames/ghostty
+        - scottames/ghostty                                                        
     install:
       packages:
         - qemu-kvm
         - libvirt-daemon-kvm
         - libvirt-client
-        - virt-manager
         - virt-viewer
         - bridge-utils
-        - edk2-ovmf 
+        - edk2-ovmf
         - ghostty
-
+        - virt-manager
   - type: default-flatpaks
     configurations:
       - scope: user
@@ -42,11 +46,12 @@ modules:
           - dev.vencord.Vesktop
           - io.github.dweymouth.supersonic
           - com.nextcloud.desktopclient.nextcloud
+          - org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
 
-  - type: signing 
+  - type: signing
 
   - type: containerfile
-      snippets:
+    snippets:
       - |
         RUN echo "MOZ_DISABLE_RDD_SANDBOX=1" >> /etc/environment
         RUN echo "LIBVA_DRIVER_NAME=nvidia" >> /etc/environment

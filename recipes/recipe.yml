@@ -46,7 +46,8 @@ modules:
           - dev.vencord.Vesktop
           - io.github.dweymouth.supersonic
           - com.nextcloud.desktopclient.nextcloud
-          - org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark
+          - org.gtk.Gtk3theme.adw-gtk3 
+          - org.gtk.Gtk3theme.adw-gtk3-dark
 
   - type: signing
 

@@ -30,6 +30,7 @@ modules:
         - edk2-ovmf
         - ghostty
         - virt-manager
+        - emacs
   - type: default-flatpaks
     configurations:
       - scope: user

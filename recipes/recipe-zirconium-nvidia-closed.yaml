@@ -4,6 +4,7 @@ description: This is my personal aurora OS image
 
 base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
+os-version: 44
 
 modules:
   - type: files

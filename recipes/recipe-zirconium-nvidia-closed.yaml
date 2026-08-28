@@ -1,8 +1,8 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-name: alfatangos-aurora-nvidia-closed
+name: alfatangos-zirconium-nvidia-closed
 description: This is my personal aurora OS image
 
-base-image: ghcr.io/ublue-os/aurora
+base-image: ghcr.io/zirconium-dev/zirconium
 image-version: latest
 
 modules:
@@ -10,6 +10,7 @@ modules:
     files:
       - source: system
         destination: /
+        
   - type: akmods
     base: main
     nvidia-driver: nvidia

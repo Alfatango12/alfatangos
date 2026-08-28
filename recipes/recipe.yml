@@ -10,10 +10,6 @@ modules:
     files:
       - source: system
         destination: /
-  - type: containerfile
-    snippets: 
-      - RUN dnf5 upgrade -y --refresh
-
   - type: akmods
     base: main
     nvidia-driver: nvidia

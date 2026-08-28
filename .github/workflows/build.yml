@@ -27,7 +27,7 @@ jobs:
       matrix:
         recipe:
           # !! Add your recipes here
-          - recipe.yml
+          # - recipe.yml
           - recipe-zirconium-nvidia-closed.yaml
     steps:
       # the build is fully handled by the reusable github action

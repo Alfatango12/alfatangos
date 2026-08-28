@@ -28,7 +28,7 @@ jobs:
         recipe:
           # !! Add your recipes here
           - recipe.yml
-          - recipe-aurora-nvidia-closed.yaml
+          - recipe-zirconium-nvidia-closed.yaml
     steps:
       # the build is fully handled by the reusable github action
       - name: Build Custom Image

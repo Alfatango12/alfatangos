@@ -47,8 +47,8 @@ modules:
         - qt6-qtmultimedia
         - dsearch
         
-  - type: containerfile
-    snippets:
+  # - type: containerfile
+    # snippets:
       # --- Enable Anaconda User Creation ---
       # Deletes the ublue-os config so Anaconda prompts you to create a user 
       # since we aren't using GNOME Initial Setup.

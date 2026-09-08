@@ -33,23 +33,22 @@ modules:
         - ghostty
         - xwayland-satellite # Often needed by Niri for legacy X11 app support
         - quickshell
-  
+ 
         # --- Dank Material Shell ---
         # This package automatically pulls in Quickshell, DGOP, fonts, and other core dependencies
         - dms
         # Optional: The official DMS login screen (replaces standard GDM/SDDM)
         - dms-greeter
-  
+ 
         # --- Recommended Extras for DMS/Wayland ---
         - cava            # Audio visualizer for the shell
         - matugen         # Material design color generator (for dynamic theming)
         - qt6ct           # Qt6 application theming
         - qt6-qtmultimedia
         - dsearch
-        - initial-setup-gui
         - greetd
-        
-- type: containerfile
+ 
+  - type: containerfile
     snippets:
       # --- Force Anaconda to ask for User Creation ---
       # Silverblue base disables this by default. This override forces it back on.
@@ -61,7 +60,6 @@ modules:
   - type: systemd
     system:
       enabled:
-        #- initial-setup.service
         - greetd.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

@@ -52,8 +52,7 @@ modules:
     snippets:
       # --- Force Anaconda to ask for User Creation ---
       # Silverblue base disables this by default. This override forces it back on.
-      - "RUN mkdir -p /etc/anaconda/profile.d && echo -e '[Anaconda.Modules.Users]\nenabled = True' > /etc/anaconda/profile.d/99-enable-users.conf"
-      
+      - "RUN mkdir -p /etc/anaconda/profile.d && echo '[Anaconda.Modules.Users]' > /etc/anaconda/profile.d/99-enable-users.conf && echo 'enabled = True' >> /etc/anaconda/profile.d/99-enable-users.conf"      
       # --- Configure Greetd to use DMS Greeter ---
       - "RUN dms-greeter enable"
         

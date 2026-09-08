@@ -54,7 +54,7 @@ modules:
       # Silverblue base disables this by default. This override forces it back on.
       - "RUN mkdir -p /etc/anaconda/profile.d && echo '[Anaconda.Modules.Users]' > /etc/anaconda/profile.d/99-enable-users.conf && echo 'enabled = True' >> /etc/anaconda/profile.d/99-enable-users.conf"      
       # --- Configure Greetd to use DMS Greeter ---
-      - "RUN dms-greeter enable"
+      - "RUN dms-greeter enable || true"
         
   - type: systemd
     system:

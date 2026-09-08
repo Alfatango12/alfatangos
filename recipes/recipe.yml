@@ -1,65 +1,20 @@
+---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
+# image will be published to ghcr.io/<user>/<name>
 name: alfatangos
-description: This is my personal OS image.
+# description will be included in the image's metadata
+description: My personal OS image starting from a blank ublue os base.
 
-base-image: ghcr.io/ublue-os/bluefin
-image-version: latest
+# the base image to build on top of (FROM) and the version tag to use
+base-image: ghcr.io/ublue-os/base-main:latest
+image-version: latest # You can pin to a specific version of Fedora as well
 
+# module configuration, executed in order
+# you can include multiple instances of the same module
 modules:
   - type: files
     files:
       - source: system
-        destination: /
-  - type: akmods
-    base: main
-    nvidia-driver: nvidia
-    install: []
+        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: dnf
-    repos:
-      copr:
-        - scottames/ghostty                                                        
-    install:
-      packages:
-        - qemu-kvm
-        - libvirt-daemon-kvm
-        - libvirt-client
-        - virt-viewer
-        - bridge-utils
-        - edk2-ovmf
-        - ghostty
-        - virt-manager
-        - emacs
-  - type: default-flatpaks
-    configurations:
-      - scope: user
-        repo:
-          title: Flathub (user)
-      - notify: true
-        scope: system
-        repo:
-          title: Flathub (system)
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - com.bitwarden.desktop
-          - com.github.xournalpp.xournalpp
-          - dev.vencord.Vesktop
-          - io.github.dweymouth.supersonic
-          - com.nextcloud.desktopclient.nextcloud
-          - org.gtk.Gtk3theme.adw-gtk3 
-          - org.gtk.Gtk3theme.adw-gtk3-dark
-
-  - type: signing
-
-  - type: containerfile
-    snippets:
-      - |
-        RUN echo "MOZ_DISABLE_RDD_SANDBOX=1" >> /etc/environment
-        RUN echo "LIBVA_DRIVER_NAME=nvidia" >> /etc/environment
-        RUN echo "__GLX_VENDOR_LIBRARY_NAME=nvidia" >> /etc/environment
-        RUN echo "MOZ_ENABLE_WAYLAND=1" >> /etc/environment
-
-  - type: systemd
-    system:
-      enabled:
-        - libvirtd.service
+  - type: signing # this sets up the proper policy & signing files for signed images to work fully

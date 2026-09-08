@@ -52,7 +52,7 @@ modules:
       # --- Enable Anaconda User Creation ---
       # Deletes the ublue-os config so Anaconda prompts you to create a user 
       # since we aren't using GNOME Initial Setup.
-      - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
+      # - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
       # --- Configure Greetd to use DMS Greeter ---
       # - RUN dms-greeter enable
 

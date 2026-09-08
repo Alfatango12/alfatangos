@@ -16,37 +16,38 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
-  - type: copr
-    copr:
-      # COPR for Niri
-      - yalter/niri
-      # COPR for Ghostty terminal
-      - scottames/ghostty
-      # Official COPR for Dank Material Shell (Stable)
-      - avengemedia/dms
+  - type: dnf
+    repos:
+      copr:
+        # COPR for Niri
+        - yalter/niri
+        # COPR for Ghostty terminal
+        - scottames/ghostty
+        # Official COPR for Dank Material Shell (Stable)
+        - avengemedia/dms
 
-  - type: rpm-ostree
     install:
-      # --- Window Manager & Terminal ---
-      - niri
-      - ghostty
-      - xwayland-satellite # Often needed by Niri for legacy X11 app support
-      - quickshell
-
-      # --- Dank Material Shell ---
-      # This package automatically pulls in Quickshell, DGOP, fonts, and other core dependencies
-      - dms
-      # Optional: The official DMS login screen (replaces standard GDM/SDDM)
-      - dms-greeter
-
-      # --- Recommended Extras for DMS/Wayland ---
-      - cava            # Audio visualizer for the shell
-      - matugen         # Material design color generator (for dynamic theming)
-      - qt6ct           # Qt6 application theming
-      - wl-clipboard    # Required for clipboard support
-      - qt6-multimedia
-      - dsearch
-      - dankcalendar
+      packages:
+        # --- Window Manager & Terminal ---
+        - niri
+        - ghostty
+        - xwayland-satellite # Often needed by Niri for legacy X11 app support
+        - quickshell
+  
+        # --- Dank Material Shell ---
+        # This package automatically pulls in Quickshell, DGOP, fonts, and other core dependencies
+        - dms
+        # Optional: The official DMS login screen (replaces standard GDM/SDDM)
+        - dms-greeter
+  
+        # --- Recommended Extras for DMS/Wayland ---
+        - cava            # Audio visualizer for the shell
+        - matugen         # Material design color generator (for dynamic theming)
+        - qt6ct           # Qt6 application theming
+        - wl-clipboard    # Required for clipboard support
+        - qt6-multimedia
+        - dsearch
+        - dankcalendar
 
   - type: containerfile
     snippets:
@@ -54,5 +55,7 @@ modules:
       # Deletes the ublue-os config so Anaconda prompts you to create a user 
       # since we aren't using GNOME Initial Setup.
       - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
+      # --- Configure Greetd to use DMS Greeter ---
+      - RUN dms-greeter enable
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

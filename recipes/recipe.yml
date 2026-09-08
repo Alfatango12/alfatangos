@@ -46,6 +46,8 @@ modules:
         - qt6ct           # Qt6 application theming
         - qt6-qtmultimedia
         - dsearch
+        - initial-setup-gui
+        - greetd
         
   # - type: containerfile
     # snippets:
@@ -55,5 +57,9 @@ modules:
       # - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
       # --- Configure Greetd to use DMS Greeter ---
       # - RUN dms-greeter enable
+  - type: systemd
+    system:
+      enabled:
+        - initial-setup.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

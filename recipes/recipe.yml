@@ -54,6 +54,6 @@ modules:
       # since we aren't using GNOME Initial Setup.
       - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
       # --- Configure Greetd to use DMS Greeter ---
-      - RUN dms-greeter enable
+      # - RUN dms-greeter enable
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

@@ -1,4 +1,3 @@
----
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 # image will be published to ghcr.io/<user>/<name>
 name: alfatangos
@@ -18,7 +17,7 @@ modules:
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
   - type: copr
-    repos:
+    copr:
       # COPR for Niri
       - yalter/niri
       # COPR for Ghostty terminal
@@ -49,12 +48,11 @@ modules:
       - dsearch
       - dankcalendar
 
-  - type: run
-    scripts:
+  - type: containerfile
+    snippets:
       # --- Enable Anaconda User Creation ---
       # Deletes the ublue-os config so Anaconda prompts you to create a user 
       # since we aren't using GNOME Initial Setup.
-      - rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true
-      - rm -f /etc/anaconda/profile.d/ublue-os.conf || true
+      - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

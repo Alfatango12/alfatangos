@@ -49,14 +49,14 @@ modules:
         - initial-setup-gui
         - greetd
         
-  - type: containerfile
-      snippets:
-        # --- Force Anaconda to ask for User Creation ---
-        # Silverblue base disables this by default. This override forces it back on.
-        - "RUN mkdir -p /etc/anaconda/profile.d && echo -e '[Anaconda.Modules.Users]\nenabled = True' > /etc/anaconda/profile.d/99-enable-users.conf"
-        
-        # --- Configure Greetd to use DMS Greeter ---
-        - "RUN dms-greeter enable"
+- type: containerfile
+    snippets:
+      # --- Force Anaconda to ask for User Creation ---
+      # Silverblue base disables this by default. This override forces it back on.
+      - "RUN mkdir -p /etc/anaconda/profile.d && echo -e '[Anaconda.Modules.Users]\nenabled = True' > /etc/anaconda/profile.d/99-enable-users.conf"
+      
+      # --- Configure Greetd to use DMS Greeter ---
+      - "RUN dms-greeter enable"
         
   - type: systemd
     system:

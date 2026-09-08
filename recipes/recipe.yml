@@ -49,17 +49,19 @@ modules:
         - initial-setup-gui
         - greetd
         
-  # - type: containerfile
-    # snippets:
-      # --- Enable Anaconda User Creation ---
-      # Deletes the ublue-os config so Anaconda prompts you to create a user 
-      # since we aren't using GNOME Initial Setup.
-      # - RUN rm -f /usr/lib/anaconda/profile.d/ublue-os.conf || true && rm -f /etc/anaconda/profile.d/ublue-os.conf || true
-      # --- Configure Greetd to use DMS Greeter ---
-      # - RUN dms-greeter enable
+  - type: containerfile
+      snippets:
+        # --- Force Anaconda to ask for User Creation ---
+        # Silverblue base disables this by default. This override forces it back on.
+        - "RUN mkdir -p /etc/anaconda/profile.d && echo -e '[Anaconda.Modules.Users]\nenabled = True' > /etc/anaconda/profile.d/99-enable-users.conf"
+        
+        # --- Configure Greetd to use DMS Greeter ---
+        - "RUN dms-greeter enable"
+        
   - type: systemd
     system:
       enabled:
-        - initial-setup.service
+        #- initial-setup.service
+        - greetd.service
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

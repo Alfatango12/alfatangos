@@ -44,11 +44,9 @@ modules:
         - cava            # Audio visualizer for the shell
         - matugen         # Material design color generator (for dynamic theming)
         - qt6ct           # Qt6 application theming
-        - wl-clipboard    # Required for clipboard support
-        - qt6-multimedia
+        - qt6-qtmultimedia
         - dsearch
-        - dankcalendar
-
+        
   - type: containerfile
     snippets:
       # --- Enable Anaconda User Creation ---

@@ -53,8 +53,7 @@ modules:
       # --- Force Anaconda to ask for User Creation ---
       # Silverblue base disables this by default. This override forces it back on.
       - "RUN dms-greeter enable || true"
-      - "RUN useradd -m -G wheel -s /bin/bash admin && echo 'giacomo:giacomo' | chpasswd && chage -d 0 changeme"
-        
+      - "RUN useradd -m -G wheel -s /bin/bash giacomo && echo 'giacomo:giacomo' | chpasswd && chage -d 0 giacomo"        
   - type: systemd
     system:
       enabled:

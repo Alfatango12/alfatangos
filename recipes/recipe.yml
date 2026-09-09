@@ -25,7 +25,7 @@ modules:
         - scottames/ghostty
         # Official COPR for Dank Material Shell (Stable)
         - avengemedia/dms
-
+    
     install:
       packages:
         # --- Window Manager & Terminal ---
@@ -61,8 +61,8 @@ modules:
 
   - type: containerfile
     snippets:
-      - "RUN authselect enable-feature with-mkhomedir || true"
-      - "RUN useradd -m -G wheel -s /bin/bash giacomo && echo 'giacomo:giacomo' | chpasswd && chage -d 0 giacomo"
+      # - "RUN authselect enable-feature with-mkhomedir || true"
+      - "RUN useradd -G wheel -s /bin/bash giacomo && echo 'giacomo:giacomo' | chpasswd && chage -d 0 giacomo"
 
   - type: systemd
     system:
@@ -70,6 +70,7 @@ modules:
         - greetd.service
         - tuned.service
         - cups.service
+        - mkhomedir-giacomo.service
     user:
       enabled:
         - dms.service
@@ -80,7 +81,7 @@ modules:
 
   - type: default-flatpaks
     configurations:
-      - scope: user
+      - scope: system
         notify: true
         install:
           - org.mozilla.firefox

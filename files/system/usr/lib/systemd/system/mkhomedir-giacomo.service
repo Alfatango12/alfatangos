@@ -1,0 +1,12 @@
+[Unit]
+Description=Create home directory for giacomo
+ConditionPathExists=!/var/home/giacomo
+Before=greetd.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/mkhomedir_helper giacomo
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

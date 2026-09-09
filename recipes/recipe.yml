@@ -43,7 +43,6 @@ modules:
         # --- Recommended Extras for DMS/Wayland ---
         - cava            # Audio visualizer for the shell
         - matugen         # Material design color generator (for dynamic theming)
-        - qt6ct           # Qt6 application theming
         - qt6ct-kde
         - qt6-qtmultimedia
         - dsearch
@@ -53,11 +52,14 @@ modules:
         - cups-pk-helper
         - kf6-kimageformats
         - adw-gtk3-theme
+        - nautilus
+        - vlc
 
     remove:
       packages:
         - alacritty
         - waybar
+        - firefox
  
   - type: containerfile
     snippets:
@@ -77,6 +79,24 @@ modules:
     user:
       enabled:
         - dms.service
-        
 
+  - type: brew
+      nofile-limits: true # increase nofile limits
+      brew-analytics: false # disable telemetry
+      
+  - type: default-flatpaks
+    configurations:
+      - scope: user
+      - notify: true
+        scope: system
+        install: # system flatpaks we want all users to have and not remove
+          - org.mozilla.firefox
+          - com.github.tchx84.Flatseal
+          - io.github.flattool.Warehouse
+          - io.missioncenter.MissionCenter
+          - org.gnome.Evince
+          - org.gnome.Loupe
+          - com.ranfdev.DistroShelf
+          - com.nextcloud.desktopclient.nextcloud
+        
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

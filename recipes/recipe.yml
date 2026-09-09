@@ -44,19 +44,39 @@ modules:
         - cava            # Audio visualizer for the shell
         - matugen         # Material design color generator (for dynamic theming)
         - qt6ct           # Qt6 application theming
+        - qt6ct-kde
         - qt6-qtmultimedia
         - dsearch
         - greetd
+        - tuned
+        - tuned-ppd
+        - cups-pk-helper
+        - kf6-kimageformats
+        - adw-gtk3-theme
+
+    remove:
+      packages:
+        - alacritty
+        - waybar
  
   - type: containerfile
     snippets:
       # --- Force Anaconda to ask for User Creation ---
       # Silverblue base disables this by default. This override forces it back on.
-      - "RUN dms-greeter enable || true"
+      # - "RUN dms-greeter enable || true"
+      # --- Auto-create home directories for users logging in without one ---
+      - "RUN authselect enable-feature with-mkhomedir || true"
       - "RUN useradd -m -G wheel -s /bin/bash giacomo && echo 'giacomo:giacomo' | chpasswd && chage -d 0 giacomo"        
   - type: systemd
     system:
       enabled:
         - greetd.service
+        - tuned.service
+        - cups.service
+        - greetd.service
+    user:
+      enabled:
+        - dms.service
+        
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

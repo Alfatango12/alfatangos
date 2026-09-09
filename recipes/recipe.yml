@@ -14,7 +14,7 @@ modules:
   - type: files
     files:
       - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+        destination: / # copies files/system/* into your image's root folder /
 
   - type: dnf
     repos:
@@ -33,16 +33,14 @@ modules:
         - ghostty
         - xwayland-satellite # Often needed by Niri for legacy X11 app support
         - quickshell
- 
+
         # --- Dank Material Shell ---
-        # This package automatically pulls in Quickshell, DGOP, fonts, and other core dependencies
         - dms
-        # Optional: The official DMS login screen (replaces standard GDM/SDDM)
         - dms-greeter
- 
+
         # --- Recommended Extras for DMS/Wayland ---
-        - cava            # Audio visualizer for the shell
-        - matugen         # Material design color generator (for dynamic theming)
+        - cava
+        - matugen
         - qt6ct-kde
         - qt6-qtmultimedia
         - dsearch
@@ -60,36 +58,31 @@ modules:
         - alacritty
         - waybar
         - firefox
- 
+
   - type: containerfile
     snippets:
-      # --- Force Anaconda to ask for User Creation ---
-      # Silverblue base disables this by default. This override forces it back on.
-      # - "RUN dms-greeter enable || true"
-      # --- Auto-create home directories for users logging in without one ---
       - "RUN authselect enable-feature with-mkhomedir || true"
-      - "RUN useradd -m -G wheel -s /bin/bash giacomo && echo 'giacomo:giacomo' | chpasswd && chage -d 0 giacomo"        
+      - "RUN useradd -m -G wheel -s /bin/bash giacomo && echo 'giacomo:giacomo' | chpasswd && chage -d 0 giacomo"
+
   - type: systemd
     system:
       enabled:
         - greetd.service
         - tuned.service
         - cups.service
-        - greetd.service
     user:
       enabled:
         - dms.service
 
   - type: brew
-      nofile-limits: true # increase nofile limits
-      brew-analytics: false # disable telemetry
-      
+    nofile-limits: true
+    brew-analytics: false
+
   - type: default-flatpaks
     configurations:
       - scope: user
-      - notify: true
-        scope: system
-        install: # system flatpaks we want all users to have and not remove
+        notify: true
+        install:
           - org.mozilla.firefox
           - com.github.tchx84.Flatseal
           - io.github.flattool.Warehouse
@@ -98,5 +91,6 @@ modules:
           - org.gnome.Loupe
           - com.ranfdev.DistroShelf
           - com.nextcloud.desktopclient.nextcloud
-        
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+          - org.chromium.Chromium
+
+  - type: signing

@@ -106,4 +106,10 @@ modules:
       - v4l2loopback
     nvidia-driver: nvidia # This fetches the closed-source driver required for Pascal GPUs
 
+  - type: kargs
+    kargs:
+      - rd.driver.blacklist=nouveau
+      - modprobe.blacklist=nouveau
+      - nvidia-drm.modeset=1
+
   - type: signing

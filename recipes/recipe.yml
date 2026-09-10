@@ -58,6 +58,7 @@ modules:
         - vlc
         - xdg-user-dirs
         - wl-clipboard
+        - fuse-libs
 
     remove:
       packages:

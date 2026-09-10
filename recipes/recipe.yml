@@ -27,6 +27,10 @@ modules:
         - avengemedia/dms
     
     install:
+      exclude:
+        - waybar
+        - fuzzel
+        - alacritty
       packages:
         # --- Window Manager & Terminal ---
         - niri
@@ -52,6 +56,8 @@ modules:
         - adw-gtk3-theme
         - nautilus
         - vlc
+        - xdg-user-dirs
+        - wl-clipboard
 
     remove:
       packages:
@@ -93,5 +99,6 @@ modules:
           - com.ranfdev.DistroShelf
           - com.nextcloud.desktopclient.nextcloud
           - org.chromium.Chromium
+          - com.bitwarden.desktop
 
   - type: signing

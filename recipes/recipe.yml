@@ -101,4 +101,9 @@ modules:
           - org.chromium.Chromium
           - com.bitwarden.desktop
 
+  - type: akmods
+    install: 
+      - v4l2loopback
+    nvidia-driver: nvidia # This fetches the closed-source driver required for Pascal GPUs
+
   - type: signing

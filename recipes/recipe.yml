@@ -61,6 +61,7 @@ modules:
         - fuse-libs
         - gvfs
         - gvfs-smb
+        - shadow-utils-subid
 
     remove:
       packages:

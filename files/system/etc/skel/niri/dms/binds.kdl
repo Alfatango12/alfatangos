@@ -1,0 +1,5 @@
+binds {
+    Mod+space hotkey-overlay-title="Launch Spotlight" { spawn "dms" "ipc" "call" "spotlight" "toggle"; }
+    Mod+Shift+Q repeat=false { close-window; }
+    Mod+Return hotkey-overlay-title="Open a Terminal: ghostty" { spawn "ghostty"; }
+}

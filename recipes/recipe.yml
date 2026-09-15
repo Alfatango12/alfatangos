@@ -59,6 +59,8 @@ modules:
         - xdg-user-dirs
         - wl-clipboard
         - fuse-libs
+        - gvfs
+        - gvfs-smb
 
     remove:
       packages:
@@ -100,7 +102,7 @@ modules:
           - com.ranfdev.DistroShelf
           - com.nextcloud.desktopclient.nextcloud
           - org.chromium.Chromium
-          - com.bitwarden.desktop
+          - it.mijorus.gearlever
 
   - type: akmods
     install: 

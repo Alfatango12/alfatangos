@@ -63,6 +63,15 @@ modules:
         - gvfs-smb
         - shadow-utils-subid
 
+        # --- Qemu KVM Virtualization ---
+        - qemu-kvm
+        - libvirt
+        - libvirt-client
+        - virt-manager
+        - virt-viewer
+        - edk2-ovmf
+        - dnsmasq
+
     remove:
       packages:
         - alacritty
@@ -81,6 +90,7 @@ modules:
         - tuned.service
         - cups.service
         - mkhomedir-giacomo.service
+        - libvirtd.service
     user:
       enabled:
         - dms.service

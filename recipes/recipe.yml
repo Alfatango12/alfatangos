@@ -37,6 +37,7 @@ modules:
         - ghostty
         - xwayland-satellite # Often needed by Niri for legacy X11 app support
         - quickshell
+        - emacs
 
         # --- Dank Material Shell ---
         - dms
